@@ -1,0 +1,626 @@
+-- -- SQLite
+-- drop table User_Account_Info ;
+-- drop table Subscription ;
+-- drop table Payment ;
+-- drop table Movies ;
+-- drop table Shows ;
+-- drop table Series ;
+-- drop table Genre;
+-- drop table Show_Director ;
+-- drop table Shows_Actor ;
+-- drop table Movie_Director;
+-- drop table Movie_Actor ;
+-- drop table Series_Director ;
+-- drop table Series_Actor ;
+-- drop table Actors ;
+-- drop table URL ;
+-- create table User_Account_Info
+-- (
+--    user_id varchar(8) unique,
+--    user_name text,
+--    user_dob date,
+--    email varchar(100) unique,
+--    phone_number varchar2(10) unique,
+--    user_account_no varchar2(20) unique,
+--    primary key (user_id)
+-- );
+-- create table Genre
+--  (
+--    genre_id varchar(8)  not null,
+--    genre_dis varchar(50),
+
+--    primary key (genre_id)
+-- );
+-- create table Subscription
+-- (
+--    sub_id varchar(8)  not null,
+--    sub_type varchar2(20),
+--    price decimal(10,2) not null,
+--    duration1 varchar2(10),
+--    sub_date date,
+--    user_id varchar(8) ,
+--    primary key(sub_id),
+--    constraint fk_usersubscription foreign key (user_id)
+--    references User_Account_Info(user_id)
+-- );
+-- create table Payment
+-- (
+--   pay_id varchar(8)  not null,
+--   paymentmode varchar2(10),
+--   pay_date date,
+--   user_id varchar(8) ,
+--   sub_id int,
+--   constraint fk_userpayment foreign key (user_id)
+--   references User_Account_Info(user_id),
+--   constraint fk_payforsub foreign key (sub_id)
+--   references Subscription(sub_id)
+-- );
+-- create table Shows
+-- ( 
+--    show_id varchar(8)  not null,
+--    name varchar(30),
+--    sh_language varchar2(20),
+--    episode_num int,
+--    sh_rating decimal(1,1),
+--    poster text,
+--    genre_id text,
+--    CONSTRAINT fk_shgenid FOREIGN KEY (genre_id) REFERENCES Genre(genre_id),
+--       primary key(show_id)
+--    );
+
+--  create table Movies
+-- (
+--    movie_id varchar(8)  not null,
+--    name varchar(30),
+--    m_language varchar2(20),
+--     m_rating decimal(1,1),
+--     m_url text,
+--     poster text,
+--     genre_id varchar(8),
+--     primary key(movie_id)
+--    ); 
+-- create table Series
+-- (
+--   series_id varchar(8)  not null,
+--   name varchar2(30),
+--   s_language varchar2(20),
+--   no_of_seasons int,
+--   s_rating decimal(1,1),
+--   poster text,
+--   genre_id text,
+--  CONSTRAINT fk_shrgenid FOREIGN KEY (genre_id) REFERENCES Genre(genre_id),
+--    primary key(series_id)
+--  );
+--  create table URL
+--  (
+--  ids varchar(8),
+--  season_no int ,
+--  episode_no int,
+--  episode_url text
+--  );
+ 
+--  create table Actors
+--  ( 
+--    actor_id varchar(8)  not null,
+--    actor_name varchar(20),
+--    gender varchar(10),
+--    primary key (actor_id)
+--    );
+--  create table Show_Director
+--  (
+--    sh_direct_name varchar(20),
+
+--    gender varchar2(10),
+--    year_ int,
+--    show_id varchar(8),
+--    constraint fk_shdirects foreign key (show_id)
+--    references Shows(show_id)
+--  );
+-- create table Movie_Director
+
+--  (
+--    m_direct_name varchar2(20),
+--    gender varchar2(10),
+--    year_ int,
+--    movie_id varchar(8),
+--    constraint fk_mdirects foreign key (movie_id)
+--    references Movies(movie_id)
+--   );
+--   create table Series_Director
+--   (
+--     s_direct_name varchar2(20),
+--    gender varchar2(10),
+--    year_ int,
+--    series_id varchar(8),
+--    constraint fk_Sdirects foreign key (series_id)
+--    references Series(series_id)
+--   );  
+--   create table Shows_Actor
+--   (
+--     actor_id varchar(8) ,
+--     show_id varchar(8) ,
+--     constraint fk_acts_show foreign key (show_id)
+--     references Shows(show_id),
+--     constraint fk_acts foreign key (actor_id)
+--     references Actors(actor_id)
+--   );
+--   create table Movie_Actor
+--   (
+--     actor_id varchar(8) ,
+--     movie_id varchar(8) ,
+--    constraint fk_acts_movie foreign key (movie_id)
+--    references Movies(movie_id),
+--    constraint fk_actor_in foreign key (actor_id)
+--    references Actors(actor_id)
+--    );
+--    create table Series_Actor
+--    (
+--      actor_id varchar(8) ,
+--     series_id varchar(8) ,
+--    constraint fk_acts_series foreign key (series_id)
+--    references Series(series_id),
+--    constraint fk_actor_ foreign key (actor_id)
+--    references Actors(actor_id)
+--    );
+   
+-- --user table  
+-- insert into User_Account_Info values ('U0001','bhuvaneshwar kumar','11-10-1991','bhuvaneshwar@gmail.com','9871563210','10110101101101');  
+-- insert into User_Account_Info values ('U0002','Rohit sharma','11-12-1991','Rohitman@gmail.com','9874563231','10110101101205');
+-- insert into User_Account_Info values ('U0003','Hardik Pandya','11-08-1991','hpandya@gmail.com','9874563330','10110101134580');
+-- insert into User_Account_Info values ('U0004','Krunal Pandya','11-04-1991','pandyaKrunal@gmail.com','9824563210','1011010547826');
+-- insert into User_Account_Info values ('u0005','Kireon Pollard','11-06-1991','Kireonpollard@gmail.com','9734563210','101111892511');
+-- insert into User_Account_Info values ('U0006','Ishan Kishan','11-02-1991','Ishankishan@gmail.com','9874593310','10165878946');
+-- insert into User_Account_Info values ('U0007','Surya ','11-12-1991','Surya@gmail.com','9874553215','10110101101102');
+
+-- --subscription table
+-- insert into Subscription values('SUB001','Premium',129.0,90,'10-01-12','U0001');
+-- insert into Subscription values('SUB002','VIP',199.0,90,'11-02-20','U0002');
+-- insert into Subscription values('SUB003','Basic',50.0,90,'12-03-19','U0003');
+-- insert into Subscription values('SUB004','Free',0,0,'12-09-14','U0004');
+
+
+-- --payment table
+-- insert into Payment values('P000001','UPI','10-06-2021','U0003','SUB003');
+-- insert into Payment values('P000002','UPI','10-06-2021','U0001','SUB001');
+-- insert into Payment values('P000003','Debit card','10-06-2021','U0002','SUB002');
+-- insert into Payment values('P000004','Credit Card','10-06-2021','U0005','SUB003');
+
+
+--  --MOVIES
+-- Insert into Actors values('AC0001','Pawan Kalyan','M');
+-- Insert into Actors values('AC0002','Keerthy Suresh','F');
+-- Insert into Genre values('G0002','Romance and action');
+--  Insert into Movies values('M0001','Agnyaathavaasi','Telugu',4.5,'<iframe width="560" height="315" src="https://www.youtube.com/embed/97h9fBWltBM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://i2.cinestaan.com/image-bank/1500-1500/105001-106000/105774.jpg','G0002');
+-- Insert into Movie_Director values('Trivikram Srinivas','M','2018','M0001');
+-- Insert into Movie_Actor values('AC0001','M0001');
+-- Insert into Movie_Actor values('AC0002','M0001');
+-- Insert into Actors values('AC0039','John Cho','M');
+-- Insert into Actors values('AC0040','Andrea Riseboro','F');
+-- Insert into Genre values('G0040','Psycological Horror and mystery');
+--  Insert into Movies values('M0039','The Grudge','English',4.3,'https://archive.org/download/the.-grudge.-2004.720p.-br-rip.x-264.-yify-trim/The.Grudge.2004.720p.BrRip.x264.YIFY_Trim.mp4','https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSATKx9Uzj2d3FcMzTw_nAE6v47RVtiMTJuZwt2I5rsIvky_aFa','G0040');
+-- Insert into Movie_Director values('Nicolas Pesce','M','2020','M0039');
+-- Insert into Movie_Actor values('AC0039','M0039');
+-- Insert into Movie_Actor values('AC0040','M0039');
+-- Insert into Actors values('AC0003','Varun Tej','M');
+-- Insert into Actors values('AC0004','Raashi Khanna','F');
+-- Insert into Genre values('G0004','Romance');
+--  Insert into Movies values('M0003','Tholi Prema','Telugu',7.3,'<iframe width="560" height="315" src="https://www.youtube.com/embed/-kFvrsAgp3M" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://bingeddata.s3.amazonaws.com/uploads/2020/11/tholi-prema.jpg','G0004');
+-- Insert into Movie_Director values('Venky Atluri','M','2018','M0003');
+-- Insert into Movie_Actor values('AC0003','M0003');
+-- Insert into Movie_Actor values('AC0004','M0003');
+-- Insert into Actors values('AC0035','RDJ','M');
+-- Insert into Actors values('AC0036','Gwyneth paltrow','F');
+-- Insert into Genre values('G0036','Action andAdventure');
+--  Insert into Movies values('M0035','Ironman 3','English',7.1,'https://archive.org/download/iron.-man.-3.2013.720p.-blu-ray.x-264.-yify-trim/Iron.Man.3.2013.720p.BluRay.x264.YIFY_Trim.mp4','http://www.movienewsletters.net/photos/156876R1.jpg','G0036');
+-- Insert into Movie_Director values('Shane Black','M','2013','M0035');
+-- Insert into Movie_Actor values('AC0035','M0035');
+-- Insert into Movie_Actor values('AC0036','M0035');
+-- Insert into Actors values('AC0005','Ram Charan','M');
+-- Insert into Actors values('AC0006','Samantha Akkineni','F');
+-- Insert into Genre values('G0006','Action and drama');
+--  Insert into Movies values('M0005','Rangasthalam','Telugu',8.4,'<iframe width="560" height="315" src="https://www.youtube.com/embed/sueMmTm-M4Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://cdn.123telugu.com/content/wp-content/uploads/2018/03/Rangastalam-review-m.jpg','G0006');
+-- Insert into Movie_Director values('Sukumar','M','2018','M0005');
+-- Insert into Movie_Actor values('AC0005','M0005');
+-- Insert into Movie_Actor values('AC0006','M0005');
+-- Insert into Actors values('AC0041','NULL','M');
+-- Insert into Actors values('AC0042','NULL','F');
+-- Insert into Genre values('G0042','Animation');
+--  Insert into Movies values('M00041','Toy story 4','English',7.7,'<iframe width="560" height="315" src="https://www.youtube.com/embed/wmiIUN-7qhE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://wnmu.edu/wp-content/uploads/Toy-Story4.jpg','G0002');
+-- Insert into Movie_Director values('Josh Cooley','M','2019','M0041');
+-- Insert into Movie_Actor values('AC0041','M0041');
+-- Insert into Movie_Actor values('AC0042','M0041');
+-- Insert into Actors values('AC0007','Mahesh Babu','M');
+-- Insert into Actors values('AC0008','Kiara Advani','F');
+-- Insert into Genre values('G0008','Action and drama');
+-- Insert into Movies values('M0007','Bharat Ane Nenu','Telugu',7.7,'https://archive.org/download/ban_20210611/www.4MovieRulz.com%20-%20Bharat%20Ane%20Nenu%20%282018%29%20Telugu%20Proper%20True%20HQ%20HDRip%20x264%20MP3%20-%20700MB%20ESub.mp4','https://assets.thehansindia.com/hansindia-bucket/Bharat-Ane-Nenu-Review_3394.jpg','G0008');
+-- Insert into Movie_Director values('Koratala Siva','M','2018','M0007');
+-- Insert into Movie_Actor values('AC0007','M0007');
+-- Insert into Movie_Actor values('AC0008','M0007');
+-- Insert into Actors values('AC0009','Jayaram','M');
+-- Insert into Actors values('AC00010','Anushka Shetty','F');
+-- Insert into Genre values('G0010','Horror and thriller');
+-- Insert into Movies values('M0009','Bhaagamathie','Telugu',7.0,'<iframe width="560" height="315" src="https://www.youtube.com/embed/Aahj3atxdS4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://regional.pinkvilla.com/wp-content/uploads/2017/11/Bhag1-452x640.jpg','G0010');
+-- Insert into Movie_Director values('G. Ashok','M','2018','M0009');
+-- Insert into Movie_Actor values('AC0009','M0009');
+-- Insert into Movie_Actor values('AC00010','M0009');
+-- Insert into Actors values('AC0011','Naveen Polishetty','M');
+-- Insert into Actors values('AC0012','Faria Abdullah','F');
+-- Insert into Genre values('G0012','comedy and drama');
+-- Insert into Movies values('M0011','Jathi Ratnalu','Telugu',7.6,'https://archive.org/download/www.-4-movie-rulz.ph-jathi-ratnalu-2021-telugu-hdrip-x-264-aac-700-mb-esub/www.4MovieRulz.ph%20-%20JATHI%20RATNALU%20%282021%29%20Telugu%20HDRip%20-%20x264%20-%20AAC%20-%20700MB%20ESub.mp4','https://www.thestatesman.com/wp-content/uploads/2019/10/3.3-1.jpg','G0012');
+-- Insert into Movie_Director values('Anudeep KV','M','2021','M0011');
+-- Insert into Movie_Actor values('AC0011','M0011');
+-- Insert into Movie_Actor values('AC0012','M0011');
+-- Insert into Actors values('AC0013','Sajja Teja','M');
+-- Insert into Actors values('AC0014','Anandhi','F');
+-- Insert into Genre values('G0014','action-horror ');
+-- Insert into Movies values('M0013','Zombie Reddy','Telugu',7,'https://archive.org/download/zombie-reddy/ZOMBIE%20REDDY.mp4','https://www.greatandhra.com/newphotos8/zombiereddy11596857205.jpg ','G0014');
+-- Insert into Movie_Director values('Prasanth Varma','M','2021','M0013');
+-- Insert into Movie_Actor values('AC0013','M0013');
+-- Insert into Movie_Actor values('AC0014','M0013');
+-- Insert into Actors values('AC0015','Nithiin','M');
+-- Insert into Actors values('AC0016','Rakul Preet Singh','F');
+-- Insert into Genre values('G0016','Action Thriller');
+-- Insert into Movies values('M0015','Check	','Telugu',6.7,'https://archive.org/download/check_202105/CHECK.mp4','https://assets.thehansindia.com/h-upload/2020/10/01/1002688-check.webp','G0016');
+-- Insert into Movie_Director values('Chandra Sekhar Yeleti','M','2021','M0015');
+-- Insert into Movie_Actor values('AC0015','M0015');
+-- Insert into Movie_Actor values('AC0016','M0015');
+-- Insert into Actors values('AC0017','Sharwanand','M');
+-- Insert into Actors values('AC0018','Priyanka Arul Mohan','F');
+-- Insert into Genre values('G0018','Drama');
+--  Insert into Movies values('M0017','Sreekaram','Telugu',7,'https://ia801401.us.archive.org/31/items/sreekaram_202105/www.4MovieRulz.ai%20-%20Sreekaram%20%282021%29%20Telugu%20HDRip%20-%20x264%20-%20MP3%20-%20700MB%20-%20ESub.mp4','https://static.toiimg.com/thumb/msid-74575471,imgsize-662756,width-800,height-600,resizemode-75/74575471.jpg','G0018');
+-- Insert into Movie_Director values('Kishor B','M','2021','M0017');
+-- Insert into Movie_Actor values('AC0017','M0017');
+-- Insert into Movie_Actor values('AC0018','M0017');
+-- Insert into Actors values('AC0019','Sundeep Kishan','M');
+-- Insert into Actors values('AC0020','Lavanya Tripathi','F');
+-- Insert into Genre values('G0020','sports drama film ');
+--  Insert into Movies values('M0019','A1 Express','Telugu',7,'https://archive.org/download/a1-express/A1%20EXPRESS%20%282021%29%20Telugu%20HDRip%20-%20x264%20-%20MP3%20-%20700MB%20ESub.mp4','https://upload.wikimedia.org/wikipedia/en/thumb/0/00/A1_Express.jpg/220px-A1_Express.jpg','G0020');
+-- Insert into Movie_Director values('Dennis Jeevan Kanukolanu','M','2021','M0019');
+-- Insert into Movie_Actor values('AC0019','M0019');
+-- Insert into Movie_Actor values('AC0020','M0019');
+-- Insert into Actors values('AC0021','Vijay','M');
+-- Insert into Actors values('AC0022','Nayanthara','F');
+-- Insert into Genre values('G0022','sports action film');
+-- Insert into Movies values('M0021','Whistle','Telugu',8,'https://archive.org/download/whistle_202106/Whistle.mp4','https://static.toiimg.com/photo/71674208.jpeg','G0022');
+-- Insert into Movie_Director values('Atlee','M','2019','M0021');
+-- Insert into Movie_Actor values('AC0021','M0021');
+-- Insert into Movie_Actor values('AC0022','M0021');
+-- Insert into Actors values('AC0023','Sai Dharam Tej','M');
+-- Insert into Actors values('AC0024','Nabha Natesh','F');
+-- Insert into Genre values('G0024','romantic comedy');
+-- Insert into Movies values('M0023','Solo brathuke so better','Telugu',6,'https://archive.org/download/solo-brathuke-so-better/Solo%20brathuke%20so%20better.mp4','https://www.telugubulletin.com/wp-content/uploads/2020/12/solo-brathuke-so-better-review.jpg','G0024');
+-- Insert into Movie_Director values('Subbu','M','2021','M0023');
+-- Insert into Movie_Actor values('AC0023','M0023');
+-- Insert into Movie_Actor values('AC0024','M0023');
+-- Insert into Actors values('AC0025','Taapsee Pannu','M');
+-- Insert into Actors values('AC0026','Anish Kuruvilla','F');
+-- Insert into Genre values('G0026','psychological thriller');
+-- Insert into Movies values('M0025','Game over','Telugu',7.1,'https://archive.org/download/game-over_202105/Game%20over.mp4','https://upload.wikimedia.org/wikipedia/en/thumb/1/12/Game_Over_2019_Poster.jpg/330px-Game_Over_2019_Poster.jpg','G0026');
+-- Insert into Movie_Director values('Ashwin Saravanan','M','2019','M0025');
+-- Insert into Movie_Actor values('AC0025','M0025');
+-- Insert into Movie_Actor values('AC0026','M0025');
+-- Insert into Actors values('AC0027','Prabhas','M');
+-- Insert into Actors values('AC0028','Shraddha Kapoor','F');
+-- Insert into Genre values('G0028','action thriller');
+-- Insert into Movies values('M0027','Saaho	','Telugu',5.2,'https://archive.org/download/saaho_202106/Saaho.mp4','https://upload.wikimedia.org/wikipedia/en/6/6b/Saaho_poster.jpg','G0028');
+-- Insert into Movie_Director values('Sujeeth','M','2019','M0027');
+-- Insert into Movie_Actor values('AC0027','M0027');
+-- Insert into Movie_Actor values('AC0028','M0027');
+-- Insert into Actors values('AC0029','Sai Dharam Tej','M');
+-- Insert into Actors values('AC0030','Rashi Khanna','F');
+-- Insert into Genre values('G0030','comedy drama');
+-- Insert into Movies values('M0029','Prathi Roju Pandage	','Telugu',6.3,'https://r2---sn-ci5gup-8b5s.googlevideo.com/videoplayback?expire=1622501633&ei=oRS1YL7nAcHV4-EPob2NqAQ&ip=223.185.107.220&id=o-ACe5_lqZFivFbNqRAvUJf2fMS6SlOCQIDlFuTGh_uSWn&itag=22&source=youtube&requiressl=yes&mh=i3&mm=31%2C29&mn=sn-ci5gup-8b5s%2Csn-ci5gup-h55d&ms=au%2Crdu&mv=m&mvi=2&pcm2cms=yes&pl=20&initcwndbps=132500&vprv=1&mime=video%2Fmp4&ns=Ue99kQJRHsQtIpZEtJATmZwF&cnr=14&ratebypass=yes&dur=8751.229&lmt=1620932772788995&mt=1622479738&fvip=2&fexp=24001373%2C24007246&c=WEB&txp=5532434&n=-CSnjPjBaeDMT-Sp&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Ccnr%2Cratebypass%2Cdur%2Clmt&sig=AOq0QJ8wRAIgbVSMQvUd5Umf_nSSYEd3BhJjjqOKvfCS8t_P3qc3mioCIAaf2ofmp-wKm07IV8_NrOaohVB1MRa4dN_cnNYTUU64&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpcm2cms%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRAIgGt33MtjA_u-nj2eNt9SW97Csuh67Am-KqdTagw7mmP0CIC5RS8otug5LTu1QR7dGSb96V1h0dKPvp2uWvreqNj-l','https://www.telugubulletin.com/wp-content/uploads/2019/12/Prati-Roju-Pandage-Review.jpg','G0030');
+-- Insert into Movie_Director values('Maruthi Dasari','M','2019','M0029');
+-- Insert into Movie_Actor values('AC0029','M0029');
+-- Insert into Movie_Actor values('AC0030','M0029');
+-- Insert into Actors values('AC0031','Paul Dinello','M');
+-- Insert into Actors values('AC0032','Julie Brown','F');
+-- Insert into Genre values('G0032','comedy');
+-- Insert into Movies values('M0031','Plump Fiction','English',2.7,'https://archive.org/download/pulp-fiction-trim/Pulp_Fiction_Trim.mp4','https://m.media-amazon.com/images/M/MV5BNjEwMzI3MTUtOWQzYS00NjlhLWFmOTYtNjlmYzA2ZThjYWUzXkEyXkFqcGdeQXVyNjA4NTIyOTE@._V1_.jpg','G0032');
+-- Insert into Movie_Director values('Bob koherr','M','1997','M0031');
+-- Insert into Movie_Actor values('AC0031','M0031');
+-- Insert into Movie_Actor values('AC0032','M0031');
+-- Insert into Actors values('AC0033','Rayn Gosling','M');
+-- Insert into Actors values('AC0034','Emma Stone','F');
+-- Insert into Genre values('G0034','Romance and comedy');
+-- Insert into Movies values('M0033','Crazy stupid love','English',7.4,'https://archive.org/download/crazy-stupid-love-trim/Crazy%2C%20Stupid%2C%20Love_Trim.mp4','https://images-na.ssl-images-amazon.com/images/I/51FTLgYfrAL.jpg','G0034');
+-- Insert into Movie_Director values('Glenn Ficarra and John Requa','M','2011','M0033');
+-- Insert into Movie_Actor values('AC0033','M0033');
+-- Insert into Movie_Actor values('AC0034','M0033');
+-- Insert into Actors values('AC0037','Brad Pitt','M');
+-- Insert into Actors values('AC0038','Helena Bonham Carter','F');
+-- Insert into Genre values('G0038','Drama and DarkComedy');
+-- Insert into Movies values('M0037','Fight Club','English',8.8,'https://archive.org/download/fight.-club.-10th.-anniversary.-edition.-1999.720p.-br-rip.x-264.-yify-trim/Fight.Club.10th.Anniversary.Edition.1999.720p.BrRip.x264.YIFY_Trim.mp4','https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQNgTszE1phYg2G7H4RrgeSEssOw-Kpnh0Si-sF5pVQQrBXJ_6e','G0038');
+-- Insert into Movie_Director values('David Fincher','M','1999','M0037');
+-- Insert into Movie_Actor values('AC0037','M0037');
+-- Insert into Movie_Actor values('AC0038','M0037');
+-- Insert into Actors values('AC0043','NULL','M');
+-- Insert into Actors values('AC0044','NULL','F');
+-- Insert into Genre values('G0044','Animation');
+-- Insert into Movies values('M0043','Coco','English',8.4,'<iframe width="560" height="315" src="https://www.youtube.com/embed/Rvr68u6k5sI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://upload.wikimedia.org/wikipedia/en/9/98/Coco_%282017_film%29_poster.jpg','G0004');
+-- Insert into Movie_Director values('Lee Unkrich','M','2017','M003');
+-- Insert into Movie_Actor values('AC0043','M0043');
+-- Insert into Movie_Actor values('AC0044','M0043');
+-- Insert into Actors values('AC0045','NULL','M');
+-- Insert into Actors values('AC0046','NULL','F');
+-- Insert into Genre values('G0046','Animation');
+-- Insert into Movies values('M0045','Incredibles 2','English',7.6,'<iframe width="560" height="315" src="https://www.youtube.com/embed/i5qOzqD9Rms" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://lumiere-a.akamaihd.net/v1/images/image_8eba0e1a.jpeg?region=0%2C0%2C540%2C810','G0006');
+-- Insert into Movie_Director values('Brad Bird','M','2018','M0045');
+-- Insert into Movie_Actor values('AC0045','M0045');
+-- Insert into Movie_Actor values('AC0046','M0045');
+-- Insert into Actors values('AC0047','Robert Downey Jr','M');
+-- Insert into Actors values('AC0048','Scarlett Johansson','F');
+-- Insert into Genre values('G0048','Fantasy and Action');
+-- Insert into Movies values('M0047','Avengers:Endgame','English',8.4,'<iframe width="560" height="315" src="https://www.youtube.com/embed/TcMBFSGVi1c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://lumiere-a.akamaihd.net/v1/images/p_avengersendgame_19751_e14a0104.jpeg?region=0%2C0%2C540%2C810','G0008');
+-- Insert into Movie_Director values('Anthony Russo ','M','2019','M0047');
+-- Insert into Movie_Actor values('AC0047','M0047');
+-- Insert into Movie_Actor values('AC0048','M0047');
+-- Insert into Actors values('AC0049','Tom Cruise','M');
+-- Insert into Actors values('AC0050','Rebecca Ferguson','F');
+-- Insert into Genre values('G0050','Adventure, Action, Mystery , Thriller');
+-- Insert into Movies values('M0049','Mission: Impossible -Fallout','English',7.7,'<iframe width="560" height="315" src="https://www.youtube.com/embed/wb49-oV0F78" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://upload.wikimedia.org/wikipedia/en/f/ff/MI_%E2%80%93_Fallout.jpg','G0010');
+-- Insert into Movie_Director values('Christopher McQuarrie','M','2018','M0049');
+-- Insert into Movie_Actor values('AC0049','M0049');
+-- Insert into Movie_Actor values('AC0050','M0049');
+-- Insert into Actors values('AC0051','Chris Hemsworth ','M');
+-- Insert into Actors values('AC0052','Cate Blanchett ','F');
+-- Insert into Genre values('G0052','Adventure, Comedy, Sci-Fi, Action, Fantasy');
+-- Insert into Movies values('M0051','Thor: Ragnarok','English',7.9,'<iframe width="560" height="315" src="https://www.youtube.com/embed/ue80QwXMRHg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://m.media-amazon.com/images/M/MV5BMjMyNDkzMzI1OF5BMl5BanBnXkFtZTgwODcxODg5MjI@._V1_.jpg','G0012');
+-- Insert into Movie_Director values('Taika Waititi','M','2017','M0051');
+-- Insert into Movie_Actor values('AC0051','M0051');
+-- Insert into Movie_Actor values('AC0052','M0051');
+-- Insert into Actors values('AC0053','Andy Serkis','M');
+-- Insert into Actors values('AC0054','Amidah Miller','F');
+-- Insert into Genre values('G0054','Adventure and Action');
+-- Insert into Movies values('M0053',' War for planet of the Apes','English',7.2,'<iframe width="560" height="315" src="https://www.youtube.com/embed/qxjPjPzQ1iU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allow Fullscreen></iframe>','https://upload.wikimedia.org/wikipedia/en/d/d7/War_for_the_Planet_of_the_Apes_poster.jpg','G0014');
+-- Insert into Movie_Director values('Matt Reeves','M','2017','M0053');
+-- Insert into Movie_Actor values('AC0053','M0053');
+-- Insert into Movie_Actor values('AC0054','M0053');
+-- Insert into Actors values('AC0055',' Robert Downey Jr. ','M');
+-- Insert into Actors values('AC0056','Zoe Saldana','F');
+-- Insert into Genre values('G0056','Fantasy and Adventure');
+-- Insert into Movies values('M0055','Avengers: Infinity War','English',8.4,'<iframe width="560" height="315" src="https://www.youtube.com/embed/6ZfuNTqbHE8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://static.wikia.nocookie.net/marvelcinematicuniverse/images/1/11/Avengers_Infinity_war_poster.jpeg/revision/latest?cb=20180316141550','G0016');
+-- Insert into Movie_Director values('Anthony Russo, Joe Russo','M','2018','M0055');
+-- Insert into Movie_Actor values('AC0055','M0055');
+-- Insert into Movie_Actor values('AC0056','M0055');
+-- Insert into Actors values('AC0057','Joaquin Phoenix ','M');
+-- Insert into Actors values('AC0058','Zazie Beetz','F');
+-- Insert into Genre values('G0058','Drama and Crime');
+-- Insert into Movies values('M0057','Joker ','English',8.4,'<iframe width="560" height="315" src="https://www.youtube.com/embed/t433PEQGErc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://m.media-amazon.com/images/M/MV5BNGVjNWI4ZGUtNzE0MS00YTJmLWE0ZDctN2ZiYTk2YmI3NTYyXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_.jpg','G0018');
+-- Insert into Movie_Director values('Todd Phillips','M','2019','M0057');
+-- Insert into Movie_Actor values('AC057','M057');
+-- Insert into Movie_Actor values('AC058','M057');
+-- Insert into Actors values('AC059','Henry Cavill, Sam Claflin','M');
+-- Insert into Actors values('AC060','Millie Bobby Brown, Helena Bonham Carter','F');
+-- Insert into Genre values('G060','Mystery & Thriller');
+-- Insert into Movies values('M059','Enola Holmes','English',6.6,'<iframe width="560" height="315" src="https://www.youtube.com/embed/1d0Zf9sXlHk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>','https://upload.wikimedia.org/wikipedia/en/e/e6/Enola_Holmes_poster.jpeg','G0020');
+-- Insert into Movie_Director values('Harry Bradbeer','M','2019','M019');
+-- Insert into Movie_Actor values('AC059','M059');
+-- Insert into Movie_Actor values('AC060','M059');
+-- --SERIES
+-- Insert into Actors values('AC0061','Pratik Gandhi','M');
+-- Insert into Actors values('AC0062','Shreya Dhanwanthary','F');
+-- Insert into Genre values('G0062','Drama');
+-- Insert into Series values('SR0001','Scam 1992','',1,9.2,'https://m.media-amazon.com/images/M/MV5BNjgxZTMxNmQtZGFkZS00NDUyLTllMzYtOTE0ZjdlMjM1ZWU0XkEyXkFqcGdeQXVyMTAyMTE1MDA1._V1_UY1200_CR85,0,630,1200_AL_.jpg','G0062');
+-- Insert into Series_Director values('Hansal Mehta','M','2020','SR0001');
+-- Insert into Series_Actor values('AC0061','SR0001');
+-- Insert into Series_Actor values('AC0062','SR0001');
+-- Insert into URL values('SR0001',1,1,'https://archive.org/download/scam-1992-s-01-e-01-hindi-720p-web-dl-x-264-links-2-u/Scam%201992%20S01E01%20Hindi%20720p%20WEB-DL%20x264%20%40Links2U.mkv');
+-- Insert into URL values('SR0001',1,2,'NULL');
+-- Insert into URL values('SR0001',1,3,'NULL');
+-- Insert into URL values('SR0001',1,4,'NULL');
+-- Insert into URL values('SR0001',1,5,'NULL');
+-- Insert into URL values('SR0001',1,6,'NULL');
+-- Insert into URL values('SR0001',1,7,'NULL');
+-- Insert into URL values('SR0001',1,8,'NULL');
+-- Insert into URL values('SR0001',1,9,'NULL');
+-- Insert into URL values('SR0001',1,10,'NULL');
+-- Insert into Actors values('AC0063','NULL','M');
+-- Insert into Actors values('AC0064','NULL','F');
+-- Insert into Genre values('G0064','Documentry');
+-- Insert into Series values('SR0002','Drive to survive','',3,8.6,'https://cdn-wp.thesportsrush.com/2021/03/901fd364-personal-vlog-youtube-thumbnail-2021-03-12t154640.043.jpg','G0064');
+-- Insert into Series_Director values('Martin Webb','M','2020','SR0002');
+-- Insert into Series_Actor values('AC0063','SR0002');
+-- Insert into Series_Actor values('AC0064','SR0002');
+-- Insert into URL values('SR0002',3,1,'https://archive.org/download/copy-of-formula.-1.-drive.to.-survive.-s-03-e-01.1080p.-web.-h-264-whosnext/Copy%20of%20Formula.1.Drive.to.Survive.S03E01.1080p.WEB.H264-WHOSNEXT.mkv');
+-- Insert into URL values('SR0002',3,2,'NULL');
+-- Insert into URL values('SR0002',3,3,'NULL');
+-- Insert into URL values('SR0002',3,4,'NULL');
+-- Insert into URL values('SR0002',3,5,'NULL');
+-- Insert into URL values('SR0002',3,6,'NULL');
+-- Insert into URL values('SR0002',3,7,'NULL');
+-- Insert into URL values('SR0002',3,8,'NULL');
+-- Insert into Actors values('AC0065','Rowan Akinson','M');
+-- Insert into Actors values('AC0066','NULL','F');
+-- Insert into Genre values('G0066','Animation');
+-- Insert into Series values('SR0003','MR bean animated series','',5,6.9,'https://images-na.ssl-images-amazon.com/images/S/pv-target-images/bbc62fbd2f7c5259e2f9fec89ec073ed373de093a982759de84fde243709f14f._RI_V_TTW_.jpg','G0066');
+-- Insert into Series_Director values('Richard Purdum','M','2002','SR0003');
+-- Insert into Series_Actor values('AC0065','SR0003');
+-- Insert into Series_Actor values('AC0066','SR0003');
+-- Insert into URL values('SR0003',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/qfg4aSLxFcI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,2,'<iframe width="560" height="315" src="https://www.youtube.com/embed/KpqWI_ZdwjI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,3,'<iframe width="560" height="315" src="https://www.youtube.com/embed/4NWCn29SXjA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,4,'<iframe width="560" height="315" src="https://www.youtube.com/embed/yIZ54zeyBk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,5,'<iframe width="560" height="315" src="https://www.youtube.com/embed/yIZ54zeyBk4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,6,'<iframe width="560" height="315" src="https://www.youtube.com/embed/nvP8SJPg4MY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,7,'<iframe width="560" height="315" src="https://www.youtube.com/embed/bf11g_i8-3w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,8,'<iframe width="560" height="315" src="https://www.youtube.com/embed/bf11g_i8-3w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,9,'<iframe width="560" height="315" src="https://www.youtube.com/embed/vn7AkFC4f3I" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0003',1,10,'<iframe width="560" height="315" src="https://www.youtube.com/embed/WqKJvCyt9Co" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0067','Naveen Kasturia ','M');
+-- Insert into Actors values('AC0068','Namita Dubey','F');
+-- Insert into Genre values('G0068','Drama');
+-- Insert into Series values('SR0004','TVF Aspirants','',1,9,'https://m.media-amazon.com/images/M/MV5BNWRkMjA0NjItMmViYS00MDQyLTgyMWYtOWFmOTA4NmU5MjRjXkEyXkFqcGdeQXVyNDY4NjAxNTc@._V1_.jpg','G0068');
+-- Insert into Series_Director values('Apoorv Singh Karki','M','2021','SR0004');
+-- Insert into Series_Actor values('AC0067','SR0004');
+-- Insert into Series_Actor values('AC0068','SR0004');
+-- Insert into URL values('SR0004',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/0Kl1ucZuSZ8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0004',1,2,'<iframe width="560" height="315" src="https://www.youtube.com/embed/7xdt3z85hu4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0004',1,3,'<iframe width="560" height="315" src="https://www.youtube.com/embed/WeWXC_ivl5s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0004',1,4,'<iframe width="560" height="315" src="https://www.youtube.com/embed/MYQB8SNy8Gc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0004',1,5,'<iframe width="560" height="315" src="https://www.youtube.com/embed/5H8xQF0PwvA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0069','Abhishek Chauhan','M');
+-- Insert into Actors values('AC0070','Nidhi Bisht','F');
+-- Insert into Genre values('G0070','Comedy');
+-- Insert into Series values('SR0005','Cubicals','',1,8.3,'https://bingeddata.s3.amazonaws.com/uploads/2019/12/Cubicles-Series-Review-1.jpg','G0070');
+-- Insert into Series_Director values('Chaitanya Kumbhakonum','M','2020','SR0005');
+-- Insert into Series_Actor values('AC0069','SR0005');
+-- Insert into Series_Actor values('AC0070','SR0005');
+-- Insert into URL values('SR0005',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/JbBsqmKclXE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0005',1,2,'<iframe width="560" height="315" src="https://www.youtube.com/embed/avbzjWknugI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0005',1,3,'<iframe width="560" height="315" src="https://www.youtube.com/embed/KuG18GtLf5w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0005',1,4,'<iframe width="560" height="315" src="https://www.youtube.com/embed/doGwuGjX-ME" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SR0005',1,5,'<iframe width="560" height="315" src="https://www.youtube.com/embed/DQUwWbKCaa8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0071','Goku','M');
+-- Insert into Actors values('AC0072','NULL','F');
+-- Insert into Genre values('G0072','Anime Adventure Fantasy Martialarts');
+-- Insert into Series values('SR0006','DragonBallZ','',9,8.8,'https://en.wikipedia.org/wiki/Dragon_Ball_Z#/media/File:Dragon_Ball_Z_Logo.png','G0072');
+-- Insert into Series_Director values('Daisuke Nishio','M','1989','SR0006');
+-- Insert into Series_Actor values('AC0071','SR0006');
+-- Insert into Series_Actor values('AC0072','SR0006');
+-- Insert into URL values('SR0006',1,1,'https://archive.org/download/dragonball-z-001-the-new-threat/Dragonball_Z_001_-_The_New_Threat.mkv');
+-- Insert into URL values('SR0006',1,2,'https://archive.org/download/dragonball-z-002-reunions/Dragonball_Z_002_Reunions.mkv');
+-- Insert into Actors values('AC0073','Benedict Cumberbatch','M');
+-- Insert into Actors values('AC0074','NULL','F');
+-- Insert into Genre values('G0074','Mystery');
+-- Insert into Series values('SR0007','Sherlock Homes','',5,8.9,'https://m.media-amazon.com/images/M/MV5BMWY3NTljMjEtYzRiMi00NWM2LTkzNjItZTVmZjE0MTdjMjJhL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTQ4NTc5OTU@._V1_UY1200_CR88,0,630,1200_AL_.jpg','G0074');
+-- Insert into Series_Director values('Sue Vertue','M','2010','SR0007');
+-- Insert into Series_Actor values('AC0073','SR0007');
+-- Insert into Series_Actor values('AC0074','SR0007');
+-- Insert into URL values('SR0007',1,1,'https://archive.org/download/sherlock-1x-02-the-blind-banker-trim/Sherlock%201x01-%20A%20Study%20in%20Pink_Trim.mp4');
+-- Insert into URL values('SR0007',1,2,'https://archive.org/download/sherlock-1x-02-the-blind-banker-trim/Sherlock%201x02-%20The%20Blind%20Banker_Trim.mp4');
+-- Insert into Actors values('AC0075','Dylan Minnette','M');
+-- Insert into Actors values('AC0076','NULL','F');
+-- Insert into Genre values('G0076','Drama');
+-- Insert into Series values('SR0008','13 Reasons why','',4,7.6,'https://static.wikia.nocookie.net/13reasonswhy/images/5/5c/13_Reasons_Why_poster.jpg/revision/latest?cb=20170411205014','G0076');
+-- Insert into Series_Director values('Joseph Incaprera','M','2017','SR0008');
+-- Insert into Series_Actor values('AC0075','SR0008');
+-- Insert into Series_Actor values('AC0076','SR0008');
+-- Insert into URL values('SR0008',1,1,'https://archive.org/download/13.-reasons.-why.-s-01-e-01.-web.-x-264-deflateeztv-trim/13.Reasons.Why.S01E01.WEB.X264-DEFLATE%5Beztv%5D_Trim.mp4');
+-- Insert into URL values('SR0008',1,2,'https://archive.org/download/13.-reasons.-why.-s-01-e-01.-web.-x-264-deflateeztv-trim/13.Reasons.Why.S01E02.WEB.X264-DEFLATE%5Beztv%5D_Trim.mp4');
+-- Insert into Actors values('AC0077','Ian Somerhalder','M');
+-- Insert into Actors values('AC0078','Nina DObrev','F');
+-- Insert into Genre values('G0078','Drama');
+-- Insert into Series values('SR0009','The Vampire Diaries','',8,7.7,'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwatch.plex.tv%2Fshow%2Fthe-vampire-diaries&psig=AOvVaw1XzaNODuN8_5Ef7D-RXsNF&ust=1623520674053000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNDSzvqTkPECFQAAAAAdAAAAABAN','G0078');
+-- Insert into Series_Director values('Julie Plec','F','2009','SR0009');
+-- Insert into Series_Actor values('AC0077','SR0009');
+-- Insert into Series_Actor values('AC0078','SR0009');
+-- Insert into URL values('SR0009',1,1,'https://archive.org/download/the-vampire-diaries-s-01-e-01.480p.-blu-ray.x-264-trim/The_Vampire_Diaries_S01_E01.480p.BluRay.x264_Trim.mp4');
+-- Insert into URL values('SR0009',1,2,'https://archive.org/download/the-vampire-diaries-s-01-e-01.480p.-blu-ray.x-264-trim/The_Vampire_Diaries_S01_E02.480p.BluRay.x264_Trim.mp4');
+-- --shows
+-- Insert into Actors values('AC0079','Karan Wahi','M');
+-- Insert into Actors values('AC0080','NULL','F');
+-- Insert into Genre values('G0080','Dance show');
+-- Insert into Shows values('SH0001','Dance india dance 7','Hindi',1,6.3,'https://pbs.twimg.com/profile_images/1135540785821044736/V98S80U_.png','G0080');
+-- Insert into Show_Director values('NULL','NULL','2019','SH0001');
+-- Insert into Shows_Actor values('AC0079','SH0001');
+-- Insert into Shows_Actor values('AC0080','SH0001');
+-- Insert into URL values('SH0001',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/MQExz-t1lTc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SH0001',1,2,'NULL');
+-- Insert into URL values('SH0001',1,3,'NULL');
+-- Insert into Actors values('AC0081','Aditya Narayan','M');
+-- Insert into Actors values('AC0082','NULL','F');
+-- Insert into Genre values('G0082','Music show');
+--  Insert into Shows values('SH0002','Indian idol 12','Hindi',1,5.1,'https://i.pinimg.com/originals/10/cb/16/10cb16a919762bf4995079a88fff5e3f.jpg','G0082');
+-- Insert into Show_Director values('Ujjwal Anand','M','2020','SH0002');
+-- Insert into Shows_Actor values('AC0081','SH0002');
+-- Insert into Shows_Actor values('AC0082','SH0002');
+-- Insert into URL values('SH0002',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/QDJk7ELZCy8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0083','Akshay Kumar','M');
+-- Insert into Actors values('AC0084','Nethra Raghuraman ','F');
+-- Insert into Genre values('G0084','Game show');
+-- Insert into Shows values('SH0003','Khatron ke Khiladi','Hindi',11,5.8,'https://cdn.colorstv.com/wp-content/uploads/2019/04/fear-factor-khatron-ke-khiladi-darr-ka-blockbuster-returns_1555155795.jpg','G0084');
+-- Insert into Show_Director values('NULL','NULL','2008','SH0003');
+-- Insert into Shows_Actor values('AC0083','SH0003');
+-- Insert into Shows_Actor values('AC0084','SH0003');
+-- Insert into URL values('SH0003',5,1,'https://www.mxplayer.in/show/watch-khatron-ke-khiladi/season-5/darr-ka-blockbuster-begins-online-8d77ae5ca86e60cc5e4c5e5d20f22481');
+-- Insert into URL values('SH0003',5,2,'https://www.mxplayer.in/show/watch-khatron-ke-khiladi/season-5/rohit-shetty-suprises-everyone-with-no-eviction-online-4826f3b7bb4b483905d92c10a1384bf8');
+-- Insert into Actors values('AC0085','Kunal Kapur','M');
+-- Insert into Actors values('AC0086','NULL','F');
+-- Insert into Genre values('G0086','Cooking Show');
+-- Insert into Shows values('SH0004','Master Chef India 5','English',6,6.5,'https://restaurantindia.s3.ap-south-1.amazonaws.com/s3fs-public/news8655.jpg','G0086');
+-- Insert into Show_Director values('Vikas Khanna','M','2009','SH0004');
+-- Insert into Shows_Actor values('AC0085','SH0004');
+-- Insert into Shows_Actor values('AC0086','SH0004');
+-- Insert into URL values('SH0004',5,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/OmhgoDQfrww" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SH0004',5,2,'<iframe width="560" height="315" src="https://www.youtube.com/embed/46jic26dgL8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SH0004',5,3,'<iframe width="560" height="315" src="https://www.youtube.com/embed/J6cvxR77aXI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0087','Kapil Sharma','M');
+-- Insert into Actors values('AC0088','NULL','F');
+-- Insert into Genre values('G0088','Talk show');
+-- Insert into Shows values('SH0005','The Kapil Sharma show','Hindi',2,7.8,'https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/f8a68734653615.56d86f6930c08.jpg','G0088');
+-- Insert into Show_Director values('Bharat Kukreti','M','2016','SH0005');
+-- Insert into Shows_Actor values('AC0087','SH0005');
+-- Insert into Shows_Actor values('AC0088','SH0005');
+-- Insert into URL values('SH0005',2,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/ZUAJb1u_J9Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SH0005',2,2,'<iframe width="560" height="315" src="https://www.youtube.com/embed/OEvn5F7vns4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SH0005',2,3,'<iframe width="560" height="315" src="https://www.youtube.com/embed/En1QiC3hFlo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0089','Scott Evans ','M');
+-- Insert into Actors values('AC0090','Jenna Dewan','F');
+-- Insert into Genre values('G0090','Dance show');
+--  Insert into Shows values('SH0006','World of dance','English',4,7.2,'https://mir-s3-cdn-cf.behance.net/project_modules/fs/6de97c63970123.5ac32036118e3.jpg','G0090');
+-- Insert into Show_Director values('Jennifer Lopez','F','2017','SH0006');
+-- Insert into Shows_Actor values('AC0089','SH0006');
+-- Insert into Shows_Actor values('AC0090','SH0006');
+-- Insert into URL values('SH0006',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/Ijg8EB3qoDY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SH0006',1,2,'<iframe width="560" height="315" src="https://www.youtube.com/embed/1QygHpDc4qM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0091','Karan Tacker','M');
+-- Insert into Actors values('AC0092','Sugandha Mishra','F');
+-- Insert into Genre values('G0092','Music show');
+--  Insert into Shows values('SH0007','The voice india','Hindi',3,6.4,'https://pbs.twimg.com/profile_images/598059968701468672/itzsZrKM_400x400.png','G0092');
+-- Insert into Show_Director values('Maarten Meijs','M','2015','SH0007');
+-- Insert into Shows_Actor values('AC0091','SH0007');
+-- Insert into Shows_Actor values('AC0092','SH0007');
+-- Insert into URL values('SH0007',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/RRwH4JaEfsc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into URL values('SH0007',1,2,'<iframe width="560" height="315" src="https://www.youtube.com/embed/HXYNUf8a8_c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0093','Amitabh Bachchan ','M');
+-- Insert into Actors values('AC0094','NULL','F');
+-- Insert into Genre values('G0094','Game show');
+--  Insert into Shows values('SH0008','KBC','Hindi',13,8.3,'https://static.wikia.nocookie.net/millionaire/images/7/7c/KBC11Logo.png/revision/latest?cb=20190817115850','G0094');
+-- Insert into Show_Director values('Rahul Verma','M','2000','SH0008');
+-- Insert into Shows_Actor values('AC0093','SH0008');
+-- Insert into Shows_Actor values('AC0094','SH0008');
+-- Insert into URL values('SH0008',12,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/9HslcjRljf8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0095','NULL','M');
+-- Insert into Actors values('AC0096','Mel Giedroyc','F');
+-- Insert into Genre values('G0096','Cooking Show');
+-- Insert into Shows values('SH0009','The Great British Bake Off','English',11,8.9,'https://www.myglassesandme.co.uk/wp-content/uploads/2019/09/IMG_20190910_215242_resized_20190910_095345097-759x500.jpg','G0096');
+-- Insert into Show_Director values('Andy Devonshire','M','2010','SH0009');
+-- Insert into Shows_Actor values('AC0095','SH0009');
+-- Insert into Shows_Actor values('AC0096','SH0009');
+-- Insert into URL values('SH0009',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/Qdv-2MiIEMI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+-- Insert into Actors values('AC0097','David letterman','M');
+-- Insert into Actors values('AC0098','NULL','F');
+-- Insert into Genre values('G0098','Talk show');
+--  Insert into Shows values('SH0010','My Next guest needs no introduction With David letterman','English',3,7.9,'https://cdn.parrotanalytics.com/images/poster-hyphen/9f7610cf-5f01-46f6-b2d6-76e45922c203.medium.jpg','G0098');
+-- Insert into Show_Director values('Michael Bonfiglio','M','2018','SH0010');
+-- Insert into Shows_Actor values('AC0097','SH0010');
+-- Insert into Shows_Actor values('AC0098','SH0010');
+-- Insert into URL values('SH0010',1,1,'<iframe width="560" height="315" src="https://www.youtube.com/embed/ctBVhyZxXYY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>');
+---- QUERIES
+--RELATIONAL AND LOGICAL OPERATORS
+--DISPLAY THE MOVIES INFORMATION whose language is telugu and rating less than 7
+--select movie_id,name,m_language,m_rating,m_url,poster from movies
+--where m_language LIKE '%Telugu%' AND m_rating <7;
+
+--display list of shows in order of rating
+-- select *from Shows
+-- order by sh_rating;
+
+--display no of users who are above 18 years 
+-- select count(user_id) from User_Account_Info
+-- where user_dob<'%-2003%';
+
+--display count of users who have payed through card 
+-- select count(u.user_id) from Payment p,User_Account_Info u
+-- where p.user_id=u.user_id
+-- and paymentmode like '%Card%';
+
+--VIEWS
+--create a view 7.3 rating for movies  whose director is Male
+-- select m.movie_id,m.name,m.m_language,m.m_rating,m.m_url,m.poster,md.m_direct_name
+-- from Movies m ,Movie_Director md where m.movie_id=md.movie_id and m.m_rating =7.3
+-- and gender like '%m%' ;
+
+
+
